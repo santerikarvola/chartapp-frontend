@@ -1,7 +1,7 @@
-import DropdownButton from 'react-bootstrap/DropdownButton'
-import 'bootstrap/dist/css/bootstrap.min.css'
-import OwnDropItem from './OwnDropItem'
-import Notification from './Notification'
+import DropdownButton from "react-bootstrap/DropdownButton"
+import "bootstrap/dist/css/bootstrap.min.css"
+import OwnDropItem from "./OwnDropItem"
+import Notification from "./Notification"
 
 const createItems = id => {
 
@@ -26,11 +26,9 @@ const createItems = id => {
 
 const OwnDropMenu = ({id, title, value, func, isFilter, setelit}) => {
 
-  // Tämä dynaamisesti, koska palvelutuotteita voi tulla lisää  
   const palvelutuotteetSet = new Set(setelit.flatMap(seteli => Object.keys(seteli.Palvelutuotteet)))
   const palvelutuotteetArray = Array.from(palvelutuotteetSet).sort()
 
-  // Loput kovakoodattuna, koska turhan monimutkaista muuten (sovellus tulee paljon herkemmäksi virheille).
   const itemsArray = createItems(id)
 
   return (
@@ -39,7 +37,7 @@ const OwnDropMenu = ({id, title, value, func, isFilter, setelit}) => {
       ? <Notification message={"Virhe: itemsArrayn luonti epäonnistui."} />
       : <DropdownButton 
         id={id} 
-        title={value === '' ? title : value}
+        title={value === "" ? title : value}
       >
         {itemsArray.map(item => (
           <OwnDropItem

@@ -88,7 +88,6 @@ describe("getValues", () => {
 
     const testValues = getValues(testYaxis, testXaxis, testSetelit)
     
-    // Sorttaa, koska Xaxis on Palvelutuotteet
     expect(testValues).toEqual(
       [1,1,1,2,1]
     )
@@ -167,7 +166,6 @@ describe("getValues", () => {
 
     const testValues = getValues(testYaxis, testXaxis, testSetelit)
 
-    // Sorttaa, koska Xaxis on Palvelutuotteet
     expect(testValues).toEqual(
       [100,500,50,1010,0]
     )
@@ -212,8 +210,7 @@ describe("getValues", () => {
     const testYaxis = "Myönnetyt määrät"
 
     const testValues = getValues(testYaxis, testXaxis, testSetelit)
-
-    // Sorttaa, koska Xaxis on Palvelutuotteet
+    
     expect(testValues).toEqual(
       [10,50,5,101,0]
     )

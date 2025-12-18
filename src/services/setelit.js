@@ -1,7 +1,6 @@
-import axios from 'axios'
+import axios from "axios"
 
-// TÄHÄN EHKÄ STRATEGY PATTERN (OTTAAKO LOKAALISTI VAI JOSTAIN INTERWEBISTÄ)
-const baseUrl = 'http://localhost:3001/api/setelit'
+const baseUrl = "http://localhost:3001/api/setelit"
 
 const getAll = () => {
   const request = axios.get(baseUrl)

@@ -32,7 +32,6 @@ describe("getChartInfo", () => {
   it("tests when names is empty",  () => {
     const testChartYaxis = "Päätöksen numero"
     const testWrongXaxis = "wrong x-axis"
-    // Aiheuttaa, että names === []
     const testChartFilters = []
     const testChartStartDate = ""
     const testChartEndDate = ""
@@ -72,8 +71,6 @@ describe("getChartInfo", () => {
     )
   })
 
-  // Tähän en osannut testata, jos names.length > values.lenght tai names.lenght < values.lenght, koska se ei käytännössä koskaan tapahdu, sillä en keksi millään, miten values voisi olla eripituinen kuin names, koska values iteroi namesin läpi
-
   it("tests when names is not empty",  () => {
     const testChartYaxis = "Päätöksen numero"
     const testWrongXaxis = "Päätöksen kuukausi"
@@ -91,7 +88,7 @@ describe("getChartInfo", () => {
       setelit : testSetelit
       })
 
-    expect(errorMessage).toBeNull
+    expect(errorMessage).toBeNull()
 
     expect(options).toEqual(
       {

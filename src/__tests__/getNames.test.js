@@ -78,7 +78,7 @@ describe("getNames", () => {
     )
   })
 
-  it("tests getNames with xaxis being Palvelutuotteet (it also sorts the testNames alphabetically",  () => {
+  it("tests getNames with xaxis being Palvelutuotteet",  () => {
     const testXaxis = "Palvelutuotteet"
     const testNames = getNames(testXaxis, testSetelit)
 

@@ -1,21 +1,20 @@
-import { useState, useEffect } from 'react'
-import seteliService from './services/setelit'
-import OwnChart from './components/OwnChart'
+import { useState, useEffect } from "react"
+import seteliService from "./services/setelit"
+import OwnChart from "./components/OwnChart"
 
-import 'bootstrap/dist/css/bootstrap.min.css'
+import "bootstrap/dist/css/bootstrap.min.css"
 
 import DatePicker from "react-datepicker"
 import { registerLocale, setDefaultLocale } from  "react-datepicker"
-import { fi } from 'date-fns/locale/fi'
+import { fi } from "date-fns/locale/fi"
 import "react-datepicker/dist/react-datepicker.css"
-registerLocale('fi', fi)
-setDefaultLocale('fi')
+registerLocale("fi", fi)
+setDefaultLocale("fi")
 
 import "./index.css"
-import OwnDropMenu from './components/OwnDropMenu'
-import Notification from './components/Notification'
+import OwnDropMenu from "./components/OwnDropMenu"
+import Notification from "./components/Notification"
 
-// Muokkaa kaikki "" => ''
 const App = () => {
 
   const [setelit, setSetelit] = useState([])
@@ -24,16 +23,16 @@ const App = () => {
 
   const [startDate, setStartDate] = useState(null)
   const [endDate, setEndDate] = useState(null)
-  const [yaxis, setYaxis] = useState('')
-  const [xaxis, setXaxis] = useState('')
-  const [type, setType] = useState('')
+  const [yaxis, setYaxis] = useState("")
+  const [xaxis, setXaxis] = useState("")
+  const [type, setType] = useState("")
   const [filters, setFilters] = useState([])
 
   const [chartStartDate, setChartStartDate] = useState(null)
   const [chartEndDate, setChartEndDate] = useState(null)
-  const [chartYaxis, setChartYaxis] = useState('')
-  const [chartXaxis, setChartXaxis] = useState('')
-  const [chartType, setChartType] = useState('')
+  const [chartYaxis, setChartYaxis] = useState("")
+  const [chartXaxis, setChartXaxis] = useState("")
+  const [chartType, setChartType] = useState("")
   const [chartFilters, setChartFilters] = useState([])
 
   useEffect(() => {
@@ -90,9 +89,6 @@ const App = () => {
     }
   }
 
-//  console.log("startDate", startDate)
-//  console.log("endDate", endDate)
-
   return (
     <div style={{margin: 10}}>
       <h1>Setelit</h1>
@@ -148,6 +144,7 @@ const App = () => {
           <p>Alkupäivämäärä</p>
           <div data-testid="start-date-id">
             <DatePicker
+              style={{marginLeft: 20}}
               calendarClassName="custom-datepicker"
               selected={startDate}
               onChange={(date) => setStartDate(date)}
@@ -157,6 +154,7 @@ const App = () => {
           <p>Loppupäivämäärä</p>
           <div data-testid="end-date-id">
             <DatePicker 
+              style={{marginLeft: 20}}
               calendarClassName="custom-datepicker"
               selected={endDate}
               onChange={(date) => setEndDate(date)}
@@ -185,7 +183,6 @@ const App = () => {
         <button type="submit" style={{borderRadius: 7}}>Lähetä</button>
       </form>
       
-      {/* Tähän tulee sitten se ChartFacade*/}
       {chartXaxis && chartYaxis && chartType
       ? <OwnChart
         chartYaxis={chartYaxis}

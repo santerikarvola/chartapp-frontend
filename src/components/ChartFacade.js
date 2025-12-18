@@ -5,26 +5,28 @@ const filterAndSort = (chartXaxis, setelit, chartFilters, chartStartDate, chartE
   const startDate = chartStartDate ? new Date(chartStartDate) : null
   const endDate = chartEndDate ? new Date(chartEndDate) : null
   
-  const dateFilteredSetelit = [...setelit].filter(seteli => {
+  const dateFilteredSetelit = setelit.filter(seteli => {
     const date = new Date(seteli["Päätöksen päivämäärä"])
     if (startDate && date < startDate) return false
     if (endDate && date > endDate) return false
     return true
   })
 
-  const palvelutuoteFilteredSetelit = [...dateFilteredSetelit].filter(seteli => Object.keys(seteli.Palvelutuotteet)
+  const palvelutuoteFilteredSetelit = dateFilteredSetelit.filter(seteli => Object.keys(seteli.Palvelutuotteet)
     .some(palvelutuote => chartFilters.includes(palvelutuote))
   )
 
   const palvelutuoteFilteredSetelit2 = palvelutuoteFilteredSetelit.map(seteli => {
     const filteredPalvelutuotteet = {}
 
-    // Miks tässä on forEach?
-    chartFilters.forEach(filter => {
+
+    for (let i = 0; i < chartFilters.length; i++) {
+      const filter = chartFilters[i]
+      
       if (seteli.Palvelutuotteet[filter]) {
         filteredPalvelutuotteet[filter] = seteli.Palvelutuotteet[filter]
       }
-    })
+    }
 
     return {
       ...seteli,
@@ -33,8 +35,8 @@ const filterAndSort = (chartXaxis, setelit, chartFilters, chartStartDate, chartE
   })
 
   const filteredSetelit = palvelutuoteFilteredSetelit2.length === 0
-  ? [...dateFilteredSetelit]
-  : [...palvelutuoteFilteredSetelit2]
+  ? dateFilteredSetelit
+  : palvelutuoteFilteredSetelit2
 
   if (chartXaxis === "Päätöksen päivämäärä" || chartXaxis === "Päätöksen kuukausi") {
     const sortedSetelit = [...filteredSetelit].sort(
@@ -44,7 +46,6 @@ const filterAndSort = (chartXaxis, setelit, chartFilters, chartStartDate, chartE
   }
 
   if (chartXaxis === "Päätöksen numero") {
-    // Täs pitäis testaa, että onhan nää oikeesti numeroita, niin sen testin vois tehdä siinä csvToJson tiedostossa
     const sortedSetelit = [...filteredSetelit].sort(
       (a, b) => a[chartXaxis].slice(1) - b[chartXaxis].slice(1)
     )
@@ -64,7 +65,6 @@ const getNames = (chartXaxis, filteredAndSortedSetelit) => {
 
   if (chartXaxis === "Palvelutuotteet") {
     const palvelutuotteetSet = new Set(filteredAndSortedSetelit.flatMap(seteli => Object.keys(seteli.Palvelutuotteet)))
-    // Tää sorttaus helpompi tehdä täällä, ei ehkä parasta koodausta
     const palvelutuotteetArray = Array.from(palvelutuotteetSet).sort()
     return palvelutuotteetArray
   }
@@ -92,7 +92,7 @@ const increaseCount = (chartYaxis, chartXaxis, seteli, valueName) => {
     }
   }
 
-  // nää vois periaatteessa yhdistää esim tuohon xaxis === "Palvelutuotteet" ja yaxis === "Päätöksen numero"
+
   if (chartXaxis === "Päätöksen päivämäärä" || chartXaxis === "Päätöksen numero") {
 
     if (chartXaxis === "Päätöksen päivämäärä" && chartYaxis === "Päätöksen numero") {
@@ -109,8 +109,8 @@ const increaseCount = (chartYaxis, chartXaxis, seteli, valueName) => {
       if (seteli[chartXaxis] === valueName) {
         const seteliPalvelutuotteet = Object.keys(seteli.Palvelutuotteet)
 
-        for (let k = 0; k < Object.keys(seteli.Palvelutuotteet).length; k++) {
-          subCount += seteli.Palvelutuotteet[seteliPalvelutuotteet[k]][chartYaxis]
+        for (let i = 0; i < Object.keys(seteli.Palvelutuotteet).length; i++) {
+          subCount += seteli.Palvelutuotteet[seteliPalvelutuotteet[i]][chartYaxis]
         }
       }
 
@@ -134,8 +134,8 @@ const increaseCount = (chartYaxis, chartXaxis, seteli, valueName) => {
       if (seteli["Päätöksen päivämäärä"].slice(0,-3) === valueName) {
         const setelinPalvelutuotteet = Object.keys(seteli.Palvelutuotteet)
 
-        for (let k = 0; k < Object.keys(seteli.Palvelutuotteet).length; k++) {
-          subCount += seteli.Palvelutuotteet[setelinPalvelutuotteet[k]][chartYaxis]
+        for (let i = 0; i < Object.keys(seteli.Palvelutuotteet).length; i++) {
+          subCount += seteli.Palvelutuotteet[setelinPalvelutuotteet[i]][chartYaxis]
         }
       }
 
@@ -191,7 +191,10 @@ const getChartInfo = ({chartYaxis, chartXaxis, chartFilters, chartStartDate, cha
     console.error("values", values)
     errorMessage = "Virhe: taulukon y-akselin arvoja on enemmän kuin x-akselin arvoja, yritä uudestaan."
   }
-  console.log("errorMessage", errorMessage)
+
+  if (errorMessage) {
+    console.log("errorMessage", errorMessage)
+  }
 
   const strategy = getChartStrategy(chartType)
   const {options, series} = strategy(names, values)

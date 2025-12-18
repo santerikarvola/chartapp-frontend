@@ -69,7 +69,6 @@ describe("OwnChart", () => {
   it("renders a notification if errorMessage is not null", () => {
     const testChartYaxis = "Päätöksen numero"
     const testWrongXaxis = "wrong x-axis"
-    // Aiheuttaa, että names === [] => errorMessage !== null
     const testChartFilters = []
     const testChartStartDate = ""
     const testChartEndDate = ""

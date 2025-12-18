@@ -104,11 +104,11 @@ describe("App", () => {
     expect(screen.getByText("Valitse x-akseli")).toBeInTheDocument()
     expect(screen.getByText("Et ole valinnut suodattimia.")).toBeInTheDocument()
     expect(screen.getByText("Valitse suodattimet")).toBeInTheDocument()
-    expect(screen.queryByTestId("datepickers")).toBeNull()
+    expect(screen.queryByTestId("datepickers")).not.toBeInTheDocument()
     expect(screen.getByText("Valitse kaavion tyyppi")).toBeInTheDocument()
 
-    expect(screen.queryByTestId("own-chart")).toBeNull()
-    expect(screen.queryByTestId("notification")).toBeNull()
+    expect(screen.queryByTestId("own-chart")).not.toBeInTheDocument()
+    expect(screen.queryByTestId("notification")).not.toBeInTheDocument
   })
 
   it("renders the date selectors when Päätöksen päivämäärä in filters", async () => {
@@ -122,8 +122,7 @@ describe("App", () => {
     await userEvent.click(filterMenuTitle)
 
     await userEvent.click(screen.getByText("Päätöksen päivämäärä"))
-
-    expect(screen.queryByTestId("datepickers")).not.toBeNull
+    expect(screen.queryByTestId("datepickers")).toBeInTheDocument()
     
   })
 
@@ -142,24 +141,19 @@ describe("App", () => {
     } )
 
     await userEvent.click(palvelutuoteTitle)
-
     await userEvent.click(screen.getByText("Fysioterapia"))
 
     const filterList = screen.queryByTestId("filter-list")
-
     expect(within(filterList).getByText("Fysioterapia")).toBeInTheDocument()
     
     await userEvent.click(filterMenuTitle)
     await userEvent.click(palvelutuoteTitle)
 
     const allFysioterapiat = screen.getAllByText("Fysioterapia")
-
     console.log(allFysioterapiat.length)
 
     await userEvent.click(allFysioterapiat[allFysioterapiat.length - 1])
-
     console.log(allFysioterapiat.length)
-
     expect(within(filterList).getByText("Fysioterapia")).not.toBeInTheDocument()
   })
 
@@ -218,7 +212,6 @@ describe("App", () => {
     const filterList = screen.queryByTestId("filter-list")
     const startDateDiv = screen.queryByTestId("start-date-id")
     const endDateDiv = screen.queryByTestId("end-date-id")
-    
     expect(within(filterList).getByText("Päätöksen päivämäärä")).toBeInTheDocument()
 
     expect(screen.queryByTestId("datepickers")).toBeInTheDocument()
@@ -284,7 +277,6 @@ describe("App", () => {
     }))
 
     expect(screen.getByText("Valitse sekä X-akseli, Y-akseli että kaaviotyyppi.")).toBeInTheDocument()
-
     expect(screen.queryByTestId("own-chart")).not.toBeInTheDocument()
   })
 
@@ -317,7 +309,6 @@ describe("App", () => {
     }))
 
     expect(screen.getByText("Valitse sekä X-akseli, Y-akseli että kaaviotyyppi.")).toBeInTheDocument()
-
     expect(screen.queryByTestId("own-chart")).not.toBeInTheDocument()
   })
 
@@ -350,7 +341,6 @@ describe("App", () => {
     }))
 
     expect(screen.getByText("Valitse sekä X-akseli, Y-akseli että kaaviotyyppi.")).toBeInTheDocument()
-
     expect(screen.queryByTestId("own-chart")).not.toBeInTheDocument()
   })
 
@@ -396,7 +386,6 @@ describe("App", () => {
     }))
 
     expect(screen.getByText("Y-akseli ja X-akseli eivät voi olla samat.")).toBeInTheDocument()
-
     expect(screen.queryByTestId("own-chart")).not.toBeInTheDocument()
   })
 
