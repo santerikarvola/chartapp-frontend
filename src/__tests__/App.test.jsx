@@ -85,7 +85,7 @@ describe("App", () => {
 
     render(<App />)
     
-    expect(screen.getByText("Setelit")).toBeInTheDocument()
+    expect(screen.getByText("Myönnetyt palvelusetelit")).toBeInTheDocument()
     expect(screen.getByText("Y-akselin valinta")).toBeInTheDocument()
     expect(screen.getByText("X-akselin valinta")).toBeInTheDocument()
     expect(screen.getByText("Suodattimien valinta")).toBeInTheDocument()
