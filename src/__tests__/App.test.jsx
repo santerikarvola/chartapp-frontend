@@ -85,6 +85,7 @@ describe("App", () => {
 
     render(<App />)
     
+    expect(screen.getByText("Palvelusetelit")).toBeInTheDocument()
     expect(screen.getByText("Tervetuloa myönnettyjen palvelusetelien tilastointisovellukseen!")).toBeInTheDocument()
     expect(screen.getByText("Y-akselin valinta")).toBeInTheDocument()
     expect(screen.getByText("X-akselin valinta")).toBeInTheDocument()
