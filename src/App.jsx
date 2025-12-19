@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react"
-import seteliService from "./services/setelit"
+import seteliService from "./services/seteliService"
 import OwnChart from "./components/OwnChart"
 
 import "bootstrap/dist/css/bootstrap.min.css"
