@@ -65,7 +65,7 @@ const testSetelit = [
   }
 ]
 
-vi.mock("../services/setelit", () => {
+vi.mock("../services/seteliService", () => {
   return {
     default: {
       getAll: vi.fn(async () => testSetelit),
