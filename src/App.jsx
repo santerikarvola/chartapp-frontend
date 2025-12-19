@@ -92,7 +92,7 @@ const App = () => {
   return (
     <div style={{margin: 10}}>
       <h1>Palvelusetelit</h1>
-      <h2>Tervetuloa myönnettyjen palvelusetelien tilastointisovellukseen!</h2>
+      <h2>Tervetuloa palvelusetelien tilastointisovellukseen!</h2>
       <br />
 
       <h5>Y-akselin valinta</h5>
