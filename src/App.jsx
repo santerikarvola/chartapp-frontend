@@ -91,7 +91,7 @@ const App = () => {
 
   return (
     <div style={{margin: 10}}>
-      <h1>Myönnetyt palvelusetelit</h1>
+      <h1>Tervetuloa myönnettyjen palvelusetelien tilastointisovellukseen!</h1>
       <br />
 
       <h5>Y-akselin valinta</h5>
