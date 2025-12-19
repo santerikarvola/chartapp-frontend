@@ -65,11 +65,11 @@ const testSetelit = [
   }
 ]
 
-vi.mock("../services/setelit", async (importOriginal) => {
-  const actual = await importOriginal()
+vi.mock("../services/setelit", () => {
   return {
-    ...actual,
-    getAll: vi.fn( async () => testSetelit)
+    default: {
+      getAll: vi.fn(async () => testSetelit),
+    }
   }
 })
 
